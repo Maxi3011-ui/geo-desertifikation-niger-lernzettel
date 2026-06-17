@@ -4,8 +4,8 @@ Statische GitHub-Pages-Seite für einen vollständigen Geographie-Lernzettel zu 
 
 ## Inhalt
 
-- Dropdown-Auswahl einzelner Themen
-- Immer nur ein Thema sichtbar
+- Alle Themen aneinandergereiht
+- Farbige Themenkarten
 - Vollständiger Inhalt der Zusammenfassung
 - Mobile- und Apple-Watch-freundliche Darstellung
 

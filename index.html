@@ -62,7 +62,7 @@
     }
 
     .masthead,
-    .viewer {
+    .topic-card {
       background: rgba(255, 255, 255, 0.95);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -96,43 +96,12 @@
       font-weight: 650;
     }
 
-    .controls {
+    .topics {
       display: grid;
-      grid-template-columns: 48px minmax(0, 1fr) 48px;
-      gap: 10px;
-      align-items: center;
+      gap: 16px;
     }
 
-    select,
-    button {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      min-height: 48px;
-      font: inherit;
-      color: var(--ink);
-      background: var(--panel);
-    }
-
-    select {
-      width: 100%;
-      padding: 0 12px;
-      font-size: 1rem;
-      font-weight: 800;
-    }
-
-    button {
-      width: 48px;
-      font-size: 1.2rem;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      color: #a8b4aa;
-      cursor: not-allowed;
-    }
-
-    .viewer {
+    .topic-card {
       overflow: hidden;
     }
 
@@ -282,20 +251,6 @@
         display: none;
       }
 
-      .controls {
-        grid-template-columns: 42px minmax(0, 1fr) 42px;
-      }
-
-      select {
-        font-size: 0.86rem;
-        min-width: 0;
-      }
-
-      button {
-        width: 42px;
-        min-height: 44px;
-      }
-
       .topic-head {
         padding: 13px;
       }
@@ -331,16 +286,11 @@
       <header class="masthead">
         <p class="label">Geographie</p>
         <h1>Desertifikationsprozess & Niger</h1>
-        <p class="subtitle">Vollständiger Lernzettel mit Dropdown-Themenauswahl. Es wird immer nur das gewählte Thema angezeigt.</p>
+        <p class="subtitle">Vollständiger Lernzettel, wieder aneinandergereiht in farbigen Themenkarten.</p>
       </header>
-      <div class="controls" aria-label="Themensteuerung">
-        <button id="prev" type="button" aria-label="Vorheriges Thema">‹</button>
-        <select id="topicSelect" aria-label="Thema auswählen"></select>
-        <button id="next" type="button" aria-label="Nächstes Thema">›</button>
-      </div>
     </section>
 
-    <section class="viewer" id="viewer" aria-live="polite"></section>
+    <section class="topics" id="topics"></section>
 
     <p class="footer">Geo-Lernzettel: Desertifikation, Sahelzone, Niger und nachhaltige Entwicklung.</p>
   </main>
@@ -348,10 +298,7 @@
   <script src="./content.js"></script>
   <script>
     const topics = window.TOPICS || [];
-    const select = document.getElementById("topicSelect");
-    const viewer = document.getElementById("viewer");
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
+    const topicsRoot = document.getElementById("topics");
 
     function escapeHtml(text) {
       return text
@@ -362,26 +309,9 @@
         .replaceAll("'", "&#39;");
     }
 
-    function fillSelect() {
-      select.innerHTML = topics.map((topic, index) =>
-        `<option value="${topic.id}">${index + 1}. ${escapeHtml(topic.title)}</option>`
-      ).join("");
-    }
-
-    function currentIndex() {
-      return Math.max(0, topics.findIndex(topic => topic.id === select.value));
-    }
-
     function render() {
-      const index = currentIndex();
-      const topic = topics[index] || topics[0];
-      if (!topic) return;
-
-      prev.disabled = index === 0;
-      next.disabled = index === topics.length - 1;
-      localStorage.setItem("geo-desertifikation-topic", topic.id);
-
-      viewer.innerHTML = `
+      topicsRoot.innerHTML = topics.map((topic, index) => `
+        <article class="topic-card" id="${escapeHtml(topic.id)}">
         <header class="topic-head ${escapeHtml(topic.accent)}">
           <div class="topic-meta">
             <span class="pill ${escapeHtml(topic.accent)}">${escapeHtml(topic.badge)}</span>
@@ -399,26 +329,9 @@
             </article>
           `).join("")}
         </div>
-      `;
+        </article>
+      `).join("");
     }
-
-    function move(delta) {
-      const index = currentIndex();
-      const nextTopic = topics[index + delta];
-      if (!nextTopic) return;
-      select.value = nextTopic.id;
-      render();
-    }
-
-    fillSelect();
-    select.value = localStorage.getItem("geo-desertifikation-topic") || topics[0]?.id || "";
-    if (!topics.some(topic => topic.id === select.value)) {
-      select.value = topics[0]?.id || "";
-    }
-
-    select.addEventListener("change", render);
-    prev.addEventListener("click", () => move(-1));
-    next.addEventListener("click", () => move(1));
     render();
   </script>
 </body>
