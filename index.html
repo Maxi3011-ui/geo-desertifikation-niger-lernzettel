@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Geo - Desertifikation & Niger</title>
+  <meta name="description" content="Apple-Watch-tauglicher Geographie-Lernzettel zu Desertifikation, Niger und nachhaltiger Entwicklung.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6f2;
+      --ink: #18221c;
+      --muted: #59685f;
+      --panel: #ffffff;
+      --line: #d9e1d8;
+      --sand: #a96824;
+      --red: #b74133;
+      --green: #237a45;
+      --blue: #2868a8;
+      --orange: #c56a18;
+      --purple: #7057a7;
+      --dark: #344034;
+      --soft-sand: #fff2df;
+      --soft-red: #fff0ee;
+      --soft-green: #eaf7ee;
+      --soft-blue: #eaf3ff;
+      --soft-orange: #fff0df;
+      --soft-purple: #f1edff;
+      --soft-dark: #eef3ee;
+      --radius: 18px;
+      --shadow: 0 16px 38px rgba(24, 34, 28, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      background:
+        linear-gradient(90deg, rgba(169, 104, 36, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(35, 122, 69, 0.08) 1px, transparent 1px),
+        var(--bg);
+      background-size: 26px 26px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .shell {
+      width: min(980px, calc(100vw - 24px));
+      margin: 0 auto;
+      padding: 18px 0 44px;
+    }
+
+    .top {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .masthead,
+    .viewer {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .masthead {
+      padding: 18px;
+    }
+
+    .label {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.1rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      font-weight: 650;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    select,
+    button {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      min-height: 48px;
+      font: inherit;
+      color: var(--ink);
+      background: var(--panel);
+    }
+
+    select {
+      width: 100%;
+      padding: 0 12px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    button {
+      width: 48px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      color: #a8b4aa;
+      cursor: not-allowed;
+    }
+
+    .viewer {
+      overflow: hidden;
+    }
+
+    .topic-head {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--soft-sand);
+    }
+
+    .topic-head.red { background: var(--soft-red); }
+    .topic-head.green { background: var(--soft-green); }
+    .topic-head.blue { background: var(--soft-blue); }
+    .topic-head.orange { background: var(--soft-orange); }
+    .topic-head.purple { background: var(--soft-purple); }
+    .topic-head.dark { background: var(--soft-dark); }
+
+    .topic-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #ffffff;
+      background: var(--sand);
+      font-size: 0.78rem;
+      font-weight: 850;
+    }
+
+    .pill.red { background: var(--red); }
+    .pill.green { background: var(--green); }
+    .pill.blue { background: var(--blue); }
+    .pill.orange { background: var(--orange); }
+    .pill.purple { background: var(--purple); }
+    .pill.dark { background: var(--dark); }
+
+    .count {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.72rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .blocks {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .block {
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--sand);
+      border-radius: 14px;
+      padding: 13px 13px 12px;
+      background: #ffffff;
+    }
+
+    .block.red { border-left-color: var(--red); }
+    .block.green { border-left-color: var(--green); }
+    .block.blue { border-left-color: var(--blue); }
+    .block.orange { border-left-color: var(--orange); }
+    .block.purple { border-left-color: var(--purple); }
+    .block.dark { border-left-color: var(--dark); }
+
+    .block.cause,
+    .block.problem,
+    .block.conflict { background: #fff8f6; border-left-color: var(--red); }
+
+    .block.measure,
+    .block.goal,
+    .block.pillar { background: #f7fff9; border-left-color: var(--green); }
+
+    .block.numbers { background: #f7fbff; border-left-color: var(--blue); }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.42;
+    }
+
+    .block.numbers li::before { content: "#"; top: 0; width: auto; height: auto; border-radius: 0; background: transparent; color: var(--blue); opacity: 1; font-weight: 900; }
+    .block.cause li::before, .block.problem li::before { content: "!"; top: 0; width: auto; height: auto; border-radius: 0; background: transparent; color: var(--red); opacity: 1; font-weight: 900; }
+    .block.measure li::before, .block.goal li::before, .block.pillar li::before { content: "✓"; top: 0; width: auto; height: auto; border-radius: 0; background: transparent; color: var(--green); opacity: 1; font-weight: 900; }
+
+    .footer {
+      margin: 14px 2px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    @media (max-width: 420px) {
+      .shell {
+        width: min(100vw - 12px, 100%);
+        padding-top: 8px;
+      }
+
+      .masthead {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 1.38rem;
+      }
+
+      .subtitle {
+        display: none;
+      }
+
+      .controls {
+        grid-template-columns: 42px minmax(0, 1fr) 42px;
+      }
+
+      select {
+        font-size: 0.86rem;
+        min-width: 0;
+      }
+
+      button {
+        width: 42px;
+        min-height: 44px;
+      }
+
+      .topic-head {
+        padding: 13px;
+      }
+
+      h2 {
+        font-size: 1.18rem;
+      }
+
+      .blocks {
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .block {
+        padding: 11px 10px;
+        border-radius: 12px;
+      }
+
+      h3 {
+        font-size: 0.98rem;
+      }
+
+      li {
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="top">
+      <header class="masthead">
+        <p class="label">Geographie</p>
+        <h1>Desertifikationsprozess & Niger</h1>
+        <p class="subtitle">Vollständiger Lernzettel mit Dropdown-Themenauswahl. Es wird immer nur das gewählte Thema angezeigt.</p>
+      </header>
+      <div class="controls" aria-label="Themensteuerung">
+        <button id="prev" type="button" aria-label="Vorheriges Thema">‹</button>
+        <select id="topicSelect" aria-label="Thema auswählen"></select>
+        <button id="next" type="button" aria-label="Nächstes Thema">›</button>
+      </div>
+    </section>
+
+    <section class="viewer" id="viewer" aria-live="polite"></section>
+
+    <p class="footer">Geo-Lernzettel: Desertifikation, Sahelzone, Niger und nachhaltige Entwicklung.</p>
+  </main>
+
+  <script src="./content.js"></script>
+  <script>
+    const topics = window.TOPICS || [];
+    const select = document.getElementById("topicSelect");
+    const viewer = document.getElementById("viewer");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    function escapeHtml(text) {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function fillSelect() {
+      select.innerHTML = topics.map((topic, index) =>
+        `<option value="${topic.id}">${index + 1}. ${escapeHtml(topic.title)}</option>`
+      ).join("");
+    }
+
+    function currentIndex() {
+      return Math.max(0, topics.findIndex(topic => topic.id === select.value));
+    }
+
+    function render() {
+      const index = currentIndex();
+      const topic = topics[index] || topics[0];
+      if (!topic) return;
+
+      prev.disabled = index === 0;
+      next.disabled = index === topics.length - 1;
+      localStorage.setItem("geo-desertifikation-topic", topic.id);
+
+      viewer.innerHTML = `
+        <header class="topic-head ${escapeHtml(topic.accent)}">
+          <div class="topic-meta">
+            <span class="pill ${escapeHtml(topic.accent)}">${escapeHtml(topic.badge)}</span>
+            <span class="count">${index + 1} / ${topics.length}</span>
+          </div>
+          <h2>${escapeHtml(topic.title)}</h2>
+        </header>
+        <div class="blocks">
+          ${topic.blocks.map(block => `
+            <article class="block ${escapeHtml(topic.accent)} ${escapeHtml(block.type)}">
+              <h3>${escapeHtml(block.title)}</h3>
+              <ul>
+                ${block.items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+              </ul>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function move(delta) {
+      const index = currentIndex();
+      const nextTopic = topics[index + delta];
+      if (!nextTopic) return;
+      select.value = nextTopic.id;
+      render();
+    }
+
+    fillSelect();
+    select.value = localStorage.getItem("geo-desertifikation-topic") || topics[0]?.id || "";
+    if (!topics.some(topic => topic.id === select.value)) {
+      select.value = topics[0]?.id || "";
+    }
+
+    select.addEventListener("change", render);
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+    render();
+  </script>
+</body>
+</html>
